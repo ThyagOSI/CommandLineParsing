@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CmdParser": {
+      "commandName": "Project",
+      "commandLineArgs": "configuration datasource --connectivity-id opcua1 getDataSource"
+    }
+  }
+}
