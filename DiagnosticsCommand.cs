@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Threading.Tasks;
@@ -14,9 +12,14 @@ namespace CmdParser
             var diagnosticscommand = new Command("diagnostics");
             root.Add(diagnosticscommand);
 
-            var getProductInfoCommand = new Command("getProductInfo");
-            diagnosticscommand.Add(getProductInfoCommand);
-            getProductInfoCommand.Handler = CommandHandler.Create(GetProductInformation);
+            //var getProductInfoCommand = new Command("getProductInfo");
+            //diagnosticscommand.Add(getProductInfoCommand);
+            //getProductInfoCommand.Handler = CommandHandler.Create(GetProductInformation);
+
+            diagnosticscommand.AddCommand(new Command("getProductInfo")
+            {
+                Handler = CommandHandler.Create(GetProductInformation),
+            });
 
             var getSystem = new Command("getSystem");
             diagnosticscommand.Add(getSystem);

@@ -1,6 +1,5 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Invocation;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,8 +15,11 @@ namespace CmdParser
             root.Add(configurationcommand);
             configurationcommand.Handler = CommandHandler.Create(GetAllConfiguration);
 
-            configurationcommand.AddOption(new Option("--component-id", "component id", new Argument<string>()));
-           
+            configurationcommand.AddOption(new Option("--component-id")
+            {
+                Argument = new Argument<string>()
+            });
+
             configurationcommand.Handler = CommandHandler.Create<string>(GetComponentIdConfiguration);
 
         }
@@ -44,10 +46,5 @@ namespace CmdParser
         {
             return configurationcommand;
         }
-
-        //internal string GetComponentIdConfigurationValue()
-        //{
-        //    return componentIdString;
-        //}
     }
 }

@@ -27,13 +27,13 @@ namespace CmdParser
 
             var postconfigsystemhealthcommand = new Command("postHealthEndpoints");
             configsystemcommand.Add(postconfigsystemhealthcommand);
-            
 
-            postconfigsystemhealthcommand.AddOption(new Option("--import-filepath", "",
-                new Argument<string>
+
+            postconfigsystemhealthcommand.AddOption(new Option("--import-filepath", ""));
+            postconfigsystemhealthcommand.AddArgument(new Argument<string>
                 {
                     Arity = ArgumentArity.ExactlyOne
-                }));
+                });
             postconfigsystemhealthcommand.Handler = CommandHandler.Create<string>(PostConfigurationSystemHealth);
             //getconfigsystemhealthcommand.AddOption(new Option("--component-id", "component id", new Argument<string>()));
             //getconfigsystemhealthcommand.Handler = CommandHandler.Create<string>(GetConfigurationSystemHealthId);

@@ -16,42 +16,25 @@ namespace CmdParser
             var configurationConnectivityIdLogging = new Command("logging");
             root.Add(configurationConnectivityIdLogging);
 
-
             var getconnidLoggingcommand = new Command("getLogging");
             configurationConnectivityIdLogging.Add(getconnidLoggingcommand);
-           
-            getconnidLoggingcommand.AddOption(new Option("--connectivity-id", "",
-            new Argument
-            {
-                Arity = ArgumentArity.ExactlyOne
-
-            }));
+            getconnidLoggingcommand.AddOption(new Option("--connectivity-id", ""));
+            getconnidLoggingcommand.AddArgument(new Argument {Arity = ArgumentArity.ExactlyOne});
             getconnidLoggingcommand.Handler = CommandHandler.Create<string>(GetConnectivityIdLogging);
-
 
             var deleteconnidLoggingcommand = new Command("deleteLogging");
             configurationConnectivityIdLogging.Add(deleteconnidLoggingcommand);
-            deleteconnidLoggingcommand.AddOption(new Option("--connectivity-id", "",
-                new Argument<string>
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }));
+            deleteconnidLoggingcommand.AddOption(new Option("--connectivity-id", ""));
+            deleteconnidLoggingcommand.AddArgument(new Argument<string> {Arity = ArgumentArity.ExactlyOne});
             deleteconnidLoggingcommand.Handler = CommandHandler.Create<string>(DeleteConnectivityIdLogging);
 
             var postconnidLoggingcommand = new Command("postLogging");
             configurationConnectivityIdLogging.Add(postconnidLoggingcommand);
-            postconnidLoggingcommand.AddOption(new Option("--connectivity-id", "",
-                new Argument<string>
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }));
-            postconnidLoggingcommand.AddOption(new Option("--import-filepath", "",
-                new Argument<string>
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                   
-                }));
-            postconnidLoggingcommand.Handler = CommandHandler.Create<string, string>(PostConnectivityIdLogging);
+            postconnidLoggingcommand.AddOption(new Option("--connectivity-id", ""));
+            postconnidLoggingcommand.AddArgument(new Argument<string> {Arity = ArgumentArity.ExactlyOne});
+            //postconnidLoggingcommand.AddOption(new Option("--import-filepath", ""));
+            //postconnidLoggingcommand.AddArgument(new Argument<string> { Arity = ArgumentArity.ExactlyOne });
+            //postconnidLoggingcommand.Handler = CommandHandler.Create<string, string>(PostConnectivityIdLogging);
 
         }
 
@@ -87,7 +70,7 @@ namespace CmdParser
             await RestClient.HttpDeleter(sb.ToString());
         }
 
-        private static async Task PostConnectivityIdLogging(string connectivityId, string importFilepath)
+        private static async Task PostConnectivityIdLogging(string connectivityId, string importFilepath="as")
         {
             if (string.IsNullOrEmpty(connectivityId))
             {

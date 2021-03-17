@@ -11,16 +11,16 @@ namespace CmdParser
 {
     internal class FileChecker
     {
-        private string _filePath;
-        private string _jsonFilecontent;
+        private static string filePath;
+        private static string jsonFilecontent;
         internal FileChecker(string importFilePath)
         {
-            _filePath = importFilePath;
+            filePath = importFilePath;
         }
 
         internal Tuple<bool, string> ValidateFile()
         {
-            if (!File.Exists(_filePath))
+            if (!File.Exists(filePath))
             {
                 return Tuple.Create(false, "File path is invalid");
             }
@@ -28,7 +28,7 @@ namespace CmdParser
 
             try
             {
-                _jsonFilecontent = JToken.Parse(File.ReadAllText(_filePath)).ToString();
+                jsonFilecontent = JToken.Parse(File.ReadAllText(filePath)).ToString();
             }
             catch (JsonException jex)
             {
@@ -39,7 +39,7 @@ namespace CmdParser
                 return Tuple.Create(false, ex.Message);
             }
 
-            return Tuple.Create(true, _jsonFilecontent);
+            return Tuple.Create(true, jsonFilecontent);
 
         }
 

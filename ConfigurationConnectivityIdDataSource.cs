@@ -10,13 +10,15 @@ namespace CmdParser
     {
         internal ConfigurationConnectivityIdDataSource(Command root)
         {
-            var configurationConnectivityIdDatasource = new Command("datasource");
+            var configurationConnectivityIdDatasource = new Command("datasource", "datasource configuration");
             root.Add(configurationConnectivityIdDatasource);
 
-            var getconniddatasourcecommand = new Command("getDataSource");
+            var getconniddatasourcecommand = new Command("getDataSource", "get datasource configurations");
             configurationConnectivityIdDatasource.Add(getconniddatasourcecommand);
-            getconniddatasourcecommand.AddOption(new Option("--connectivity-id", "connectivity id", 
-                new Argument<string>{Arity = ArgumentArity.ExactlyOne} ));
+            getconniddatasourcecommand.AddOption(new Option("--connectivity-id", "connectivity id")
+            {
+                Argument =  new Argument<string> {Arity = ArgumentArity.ExactlyOne},
+            });
             getconniddatasourcecommand.Handler = CommandHandler.Create<string>(GetConnectivityIdDataSource);
 
         }
@@ -29,6 +31,7 @@ namespace CmdParser
                 Console.WriteLine("Missing option: --connectivity-id");
                 return;
             }
+
             var sb = new StringBuilder();
             sb.Append(RestClient.baseUrl);
             sb.Append("/configuration");
